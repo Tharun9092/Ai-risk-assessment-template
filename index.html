@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Risk Assessment | Fintech SMEs</title>
+<style>
+:root{--navy:#12304a;--blue:#1769e0;--blue2:#eaf2ff;--bg:#f5f8fc;--white:#fff;--line:#d9e3ed;--muted:#667b8f;--green:#167a55;--greenbg:#e8f7f0;--amber:#986716;--amberbg:#fff5dd;--red:#b52d2d;--redbg:#ffeded;--shadow:0 12px 35px rgba(18,48,74,.09)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#29465d;font:15px/1.55 Inter,Segoe UI,Arial,sans-serif}
+header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.head{max-width:1080px;margin:auto;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:12px;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:850}.brand b{display:block;color:var(--navy);font-size:15px}.brand span{display:block;color:var(--muted);font-size:12px}.status{font-size:13px;font-weight:750;color:var(--muted)}
+.track{height:4px;background:#e9eef5}.fill{height:100%;width:0;background:var(--blue);transition:.25s}
+main{max-width:930px;margin:34px auto;padding:0 18px}.card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:34px;margin-bottom:20px}
+.hero{padding:46px}.tag{display:inline-flex;padding:6px 11px;border-radius:99px;background:var(--blue2);color:#1554b6;font-size:11px;font-weight:850;letter-spacing:.06em}
+h1{font-size:44px;line-height:1.08;color:var(--navy);margin:16px 0}h1 span{color:var(--blue)}h2{color:var(--navy);font-size:25px;margin:10px 0}h3{color:var(--navy)}.lead{font-size:17px;color:#526b82;max-width:780px}
+.notice{padding:16px 18px;border-radius:13px;background:#f2f6fa;border:1px solid #dce7f2;margin:20px 0}.notice b{color:var(--navy)}
+.warning{padding:16px 18px;border-radius:13px;background:#fff8e8;border-left:4px solid #d59a27;color:#5e4a20;margin:20px 0}
+.metaGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}.field label{display:block;font-weight:750;color:var(--navy);margin-bottom:7px}.field input{width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;font:inherit}.field small{display:block;color:var(--muted);margin-top:4px}
+.btn{border:0;border-radius:12px;padding:13px 19px;font-size:15px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:#fff}.secondary{background:#e9eef5;color:var(--navy)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.category{display:inline-block;padding:6px 10px;border-radius:99px;background:#eef4fa;color:#385a73;font-size:12px;font-weight:800;margin-bottom:11px}.qtop{display:flex;justify-content:space-between;gap:15px;align-items:center;color:var(--muted);font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.06em}.required{color:#a12626;background:#fff0f0;padding:5px 8px;border-radius:99px}
+.qtitle{font-size:26px;line-height:1.28;color:var(--navy);font-weight:800;margin:8px 0 14px}.ref{font-size:13px;color:#557086;margin-bottom:20px}.ref b{color:var(--navy)}
+.why{background:#f6f9fc;border:1px solid var(--line);border-radius:13px;padding:15px;margin-bottom:20px}.why b{display:block;color:var(--navy);margin-bottom:4px}
+.answers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.answer{border:1.5px solid var(--line);border-radius:15px;padding:17px;cursor:pointer;background:#fff;transition:.15s}.answer:hover{border-color:#8eb4ee}.answer.active{border-color:var(--blue);background:var(--blue2);box-shadow:0 0 0 3px #1769e014}.answer input{display:none}.answer b{display:block;color:var(--navy);font-size:16px}.answer small{display:block;color:var(--muted);margin-top:4px}
+.notes{margin-top:20px}.notes label{display:block;font-weight:750;color:var(--navy);margin-bottom:7px}textarea{width:100%;min-height:90px;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;resize:vertical}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:23px}.hidden{display:none}.center{text-align:center}
+.score{font-size:66px;font-weight:900;color:var(--navy);letter-spacing:-.04em}.badge{display:inline-block;padding:7px 14px;border-radius:99px;font-weight:850}.high{color:var(--green);background:var(--greenbg)}.mid{color:var(--amber);background:var(--amberbg)}.low{color:var(--red);background:var(--redbg)}
+.action{border:1px solid var(--line);border-radius:13px;padding:16px;margin:9px 0;background:#fbfcfe}.action b{display:block;color:var(--navy);margin-bottom:4px}.fine{font-size:12px;color:var(--muted)}
+.resultTable{width:100%;border-collapse:collapse;margin-top:20px}.resultTable th,.resultTable td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}.resultTable th{background:#f5f8fc;color:var(--navy)}
+.success{background:var(--greenbg);border:1px solid #bfe8d5;color:#155d44;padding:15px;border-radius:12px}.error{background:var(--redbg);border:1px solid #f1c0c0;color:#8d2424;padding:15px;border-radius:12px}
+@media(max-width:720px){.hero{padding:30px}.card{padding:23px}h1{font-size:34px}.answers,.metaGrid{grid-template-columns:1fr}.status{display:none}}
+@media print{header,.no-print{display:none!important}body{background:#fff}.card{box-shadow:none;break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+<div class="head">
+  <div class="brand"><div class="logo">AI</div><div><b>AI Risk Assessment</b><span>Fintech SMEs · EU AI Act</span></div></div>
+  <div class="status" id="status">Introduction</div>
+</div>
+<div class="track"><div class="fill" id="fill"></div></div>
+</header>
+
+<main>
+<section class="card hero" id="intro">
+  <span class="tag">RESEARCH ARTEFACT</span>
+  <h1>AI Risk Assessment<br><span>for Fintech SMEs</span></h1>
+  <p class="lead">A lightweight, human-centred assessment template designed to help fintech SMEs review selected AI governance and risk-management practices in a clear and practical way.</p>
+
+  <div class="metaGrid">
+    <div class="field"><label>Assessment date</label><input id="assessmentDate" type="date"></div>
+    <div class="field"><label>Assessment ID</label><input id="assessmentId" readonly></div>
+  </div>
+
+  <div class="notice"><b>How to complete the assessment</b><br>
+  Answer the ten questions for the AI system being assessed. Select <b>Yes</b>, <b>Partial</b>, or <b>No</b>. You may add supporting evidence or notes.</div>
+
+  <div class="warning"><b>Important:</b> This tool provides an indicative readiness and gap-identification result for research and initial self-assessment. It is not legal advice, a formal conformity assessment, or an official EU AI Act compliance determination.</div>
+
+  <button class="btn primary" onclick="start()">Start assessment →</button>
+</section>
+
+<section id="questionPage" class="hidden"></section>
+
+<section class="card hidden" id="result">
+  <div class="center">
+    <span class="tag">ASSESSMENT COMPLETE</span>
+    <h2>Indicative AI risk readiness</h2>
+    <div class="score" id="score"></div>
+    <div id="badge"></div>
+    <p class="lead" id="summary" style="margin:14px auto"></p>
+  </div>
+
+  <h3>Assessment details</h3>
+  <table class="resultTable">
+    <tr><th>Assessment ID</th><td id="rId"></td></tr>
+    <tr><th>Assessment date</th><td id="rDate"></td></tr>
+    <tr><th>Questions answered</th><td>10 of 10</td></tr>
+    <tr><th>Readiness result</th><td id="rLevel"></td></tr>
+  </table>
+
+  <h3 style="margin-top:28px">Priority areas</h3>
+  <div id="actions"></div>
+
+  <div class="warning"><b>Interpretation:</b> The result is an indicative research/readiness measure. It must not be interpreted as a legal conclusion about compliance with the EU AI Act.</div>
+
+  <div id="submitStatus" class="hidden"></div>
+
+  <div class="nav no-print">
+    <button class="btn secondary" onclick="downloadReport()">Download final report</button>
+    <button class="btn primary" onclick="submitResponse()">Submit assessment</button>
+  </div>
+  <p class="fine no-print">Your researcher should configure an approved university/Microsoft submission endpoint before live deployment. If no endpoint is configured, the assessment remains on this device.</p>
+</section>
+</main>
+
+<script>
+/*
+  DEPLOYMENT:
+  Replace the empty string below with the approved Power Automate / university
+  endpoint that accepts JSON POST requests. Do not put passwords, API keys,
+  or Microsoft Graph credentials in this file.
+*/
+const SUBMISSION_URL = "";
+
+const Q=[
+{cat:"AI System Classification",q:"Does your AI system influence credit or loan decisions?",ref:"Annex III, point 5(b); Article 6",why:"This helps identify whether the intended purpose may fall within the EU AI Act's high-risk financial-services category.",action:"Confirm the intended purpose and assess whether the relevant high-risk requirements apply."},
+{cat:"Governance & Accountability",q:"Has a named person been assigned responsibility for AI risk management?",ref:"Article 9(1); Article 14",why:"Clear responsibility supports accountability and effective risk management and human oversight.",action:"Assign and document responsibility for AI risk management and oversight."},
+{cat:"Human Oversight",q:"Can a human override a decision before it reaches the customer?",ref:"Article 14(4)(d)",why:"Human oversight should allow appropriate intervention and control over relevant AI outputs.",action:"Define an effective human-oversight process and ensure authorised personnel can intervene where appropriate."},
+{cat:"Data Governance",q:"Has the training data been checked for quality and bias?",ref:"Article 10(2)–(3)",why:"Data governance supports appropriate data quality and helps address risks arising from unsuitable or biased training data.",action:"Document data-quality controls and relevant bias-related checks."},
+{cat:"Data Governance",q:"Has the use of alternative data been documented and justified?",ref:"Article 10(2)(f)",why:"Where alternative data is used, the organisation should understand and document why it is appropriate for the intended AI purpose.",action:"Document the source, purpose, justification and governance of alternative data."},
+{cat:"Transparency & Explainability",q:"Can you explain credit decisions in plain language?",ref:"Article 13(1); GDPR Article 22",why:"People affected by AI-supported decisions need understandable information about the system and its role.",action:"Prepare clear, accessible explanations of how the AI system contributes to relevant decisions."},
+{cat:"Transparency & Human Review",q:"Are customers told AI was used and can they request human review?",ref:"Article 13(1); GDPR Article 22",why:"Transparency and appropriate human involvement help people understand and challenge decisions where applicable.",action:"Review customer-facing information and define an appropriate human-review route."},
+{cat:"Documentation & Record Keeping",q:"Does technical documentation and decision logging exist?",ref:"Articles 11–12; Annex IV",why:"Documentation and record keeping support traceability, accountability and ongoing governance.",action:"Maintain appropriate technical documentation and records of relevant AI operation and decisions."},
+{cat:"Post-Deployment Monitoring",q:"Is the system's performance monitored after deployment?",ref:"Articles 9, 15 and 72",why:"Ongoing monitoring helps identify performance, robustness and risk issues after deployment.",action:"Define post-deployment monitoring and procedures for addressing identified problems."},
+{cat:"Incident Management & Review",q:"Is there an incident reporting process and a review date?",ref:"Article 73; Article 9(4)",why:"A defined process supports incident response and keeps the risk assessment under review.",action:"Create an incident-management process and schedule periodic review of risks and controls."}
+];
+
+let A=Array(10).fill(""),N=Array(10).fill(""),current=0,submitted=false;
+
+function init(){
+  document.getElementById("assessmentDate").value=new Date().toISOString().slice(0,10);
+  document.getElementById("assessmentId").value="AI-"+new Date().toISOString().replace(/\D/g,"").slice(0,14)+"-"+Math.random().toString(36).slice(2,7).toUpperCase();
+}
+init();
+
+function start(){current=0;renderQuestion();document.getElementById("intro").classList.add("hidden");document.getElementById("questionPage").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"})}
+
+function renderQuestion(){
+ const x=Q[current], root=document.getElementById("questionPage");
+ root.innerHTML=`<section class="card">
+ <div class="qtop"><span>Question ${current+1} of 10</span><span class="required">Required</span></div>
+ <div class="category">${x.cat}</div>
+ <div class="qtitle">${x.q}</div>
+ <div class="ref"><b>EU AI Act reference:</b> ${x.ref}</div>
+ <div class="why"><b>Why this matters</b>${x.why}</div>
+ <div class="answers">
+ ${[
+ ["yes","Yes","The practice or requirement is in place."],
+ ["partial","Partial","Some elements are in place, but improvement may be needed."],
+ ["no","No","The practice or requirement is not currently in place."]
+ ].map(o=>`<label class="answer ${A[current]===o[0]?'active':''}" id="a-${o[0]}"><input type="radio" name="answer" value="${o[0]}" onchange="pick('${o[0]}')"><b>${o[1]}</b><small>${o[2]}</small></label>`).join("")}
+ </div>
+ <div class="notes"><label>Evidence / notes <span class="fine">(optional)</span></label>
+ <textarea id="notes" placeholder="Add supporting evidence, existing controls, documents, gaps or comments...">${N[current]}</textarea></div>
+ <div class="nav">
+ <button class="btn secondary" ${current===0?"disabled":""} onclick="previous()">← Previous</button>
+ <button class="btn primary" onclick="${current===9?"finish()":"next()"}">${current===9?"View final result":"Next question →"}</button>
+ </div>
+ </section>`;
+ document.getElementById("status").textContent=`Question ${current+1} of 10`;
+ document.getElementById("fill").style.width=(current/10*100)+"%";
+}
+
+function pick(v){A[current]=v;document.querySelectorAll(".answer").forEach(e=>e.classList.remove("active"));document.getElementById("a-"+v).classList.add("active")}
+function save(){N[current]=document.getElementById("notes").value}
+function next(){save();if(!A[current]){alert("Please select Yes, Partial or No before continuing.");return}current++;renderQuestion();window.scrollTo({top:0,behavior:"smooth"})}
+function previous(){save();current--;renderQuestion();window.scrollTo({top:0,behavior:"smooth"})}
+
+function finish(){
+ save();if(A.some(v=>!v)){alert("Please answer all 10 questions before viewing the final result.");return}
+ const score=A.filter(v=>v==="yes").length,pct=score*10;
+ let cls=score>=8?"high":score>=5?"mid":"low",level=score>=8?"High readiness":score>=5?"Medium readiness":"Low readiness";
+ let summary=score>=8?"Most assessed practices are currently addressed. Continue monitoring and maintain supporting evidence.":score>=5?"Several assessed practices are addressed, but some areas require further development.":"A number of assessed practices require attention. Prioritise the identified gaps and review the relevant requirements.";
+ document.getElementById("score").textContent=pct+"%";document.getElementById("badge").innerHTML=`<span class="badge ${cls}">${level}</span>`;
+ document.getElementById("summary").textContent=summary;document.getElementById("rId").textContent=document.getElementById("assessmentId").value;
+ document.getElementById("rDate").textContent=document.getElementById("assessmentDate").value;document.getElementById("rLevel").textContent=level+" ("+pct+"%)";
+ let list=document.getElementById("actions");list.innerHTML="";
+ Q.forEach((x,i)=>{if(A[i]!=="yes")list.innerHTML+=`<div class="action"><b>Q${i+1} · ${x.cat}</b>${x.action}<div class="fine" style="margin-top:5px">Reference: ${x.ref}</div></div>`});
+ document.getElementById("questionPage").classList.add("hidden");document.getElementById("result").classList.remove("hidden");
+ document.getElementById("status").textContent="Complete";document.getElementById("fill").style.width="100%";window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function payload(){
+ const score=A.filter(v=>v==="yes").length;
+ return {assessment_id:document.getElementById("assessmentId").value,assessment_date:document.getElementById("assessmentDate").value,submitted_at:new Date().toISOString(),score_yes:score,score_max:10,readiness:score>=8?"High":score>=5?"Medium":"Low",responses:Q.map((x,i)=>({question_number:i+1,category:x.cat,question:x.q,response:A[i],evidence_or_notes:N[i],eu_ai_act_reference:x.ref}))};
+}
+
+async function submitResponse(){
+ const box=document.getElementById("submitStatus");
+ box.className="notice";box.classList.remove("hidden");
+ if(!SUBMISSION_URL){box.innerHTML="<b>Submission endpoint not configured.</b><br>The assessment has not been sent anywhere. Download the report and keep it locally until the approved TU Dublin/Microsoft response endpoint is configured.";return}
+ try{
+  const r=await fetch(SUBMISSION_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload())});
+  if(!r.ok)throw new Error("HTTP "+r.status);
+  submitted=true;box.className="success";box.innerHTML="<b>Assessment submitted successfully.</b><br>Your response has been sent to the configured research data-collection endpoint.";
+ }catch(e){box.className="error";box.innerHTML="<b>Submission failed.</b><br>Please do not resubmit repeatedly. Download the final report and contact the researcher using the study instructions."}
+}
+
+function downloadReport(){
+ const p=payload(),score=p.score_yes,pct=score*10,level=p.readiness;
+ let rows=Q.map((q,i)=>`<tr><td>${i+1}</td><td>${q.cat}</td><td>${q.q}</td><td>${A[i]}</td><td>${N[i]||"—"}</td><td>${q.ref}</td></tr>`).join("");
+ const html=`<!doctype html><html><head><meta charset="utf-8"><title>AI Risk Assessment Report</title><style>body{font:14px Arial;color:#243b53;max-width:1100px;margin:35px auto}h1{color:#12304a}h2{color:#1769e0}table{width:100%;border-collapse:collapse}th,td{border:1px solid #d9e3ed;padding:8px;vertical-align:top}th{background:#f3f6fa} .note{padding:12px;background:#fff8e8;border-left:4px solid #d59a27}</style></head><body><h1>AI Risk Assessment for Fintech SMEs</h1><p><b>Assessment ID:</b> ${p.assessment_id}<br><b>Date:</b> ${p.assessment_date}<br><b>Readiness:</b> ${level} (${pct}%)</p><h2>Assessment responses</h2><table><tr><th>#</th><th>Category</th><th>Question</th><th>Response</th><th>Evidence / Notes</th><th>EU AI Act reference</th></tr>${rows}</table><h2>Interpretation</h2><p>This report provides an indicative research/readiness measure and is not legal advice, a formal conformity assessment, or an official EU AI Act compliance determination.</p></body></html>`;
+ const blob=new Blob([html],{type:"text/html;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`AI_Risk_Assessment_Report_${p.assessment_id}.html`;a.click();URL.revokeObjectURL(a.href);
+}
+</script>
+</body>
+</html>
